@@ -1,7 +1,7 @@
 ---
 title: "Regression Models Course Project"
-author: "Vince Glick"
-date: "Saturday, May 23, 2015"
+author: 
+date: 
 output:
   html_document:
     theme: flatly
