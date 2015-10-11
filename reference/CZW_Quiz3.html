@@ -79,11 +79,7 @@ summary(fit)$coefficient</code></pre>
 ## factor(cyl)6 -4.255582  1.3860728 -3.070244 4.717834e-03
 ## factor(cyl)8 -6.070860  1.6522878 -3.674214 9.991893e-04
 ## wt           -3.205613  0.7538957 -4.252065 2.130435e-04</code></pre>
-<pre class="r"><code>##               Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)  33.990794  1.8877934 18.005569 6.257246e-17
-## factor(cyl)6 -4.255582  1.3860728 -3.070244 4.717834e-03
-## factor(cyl)8 -6.070860  1.6522878 -3.674214 9.991893e-04
-## wt           -3.205613  0.7538957 -4.252065 2.130435e-04</code></pre>
+<p><strong>ANSWER: -6.071</strong></p>
 <p>Question 2</p>
 <p>Consider the mtcars data set. Fit a model with mpg as the outcome that includes number of cylinders as a factor variable and weight as a possible confounding variable. Compare the effect of 8 versus 4 cylinders on mpg for the adjusted and unadjusted by weight models. Here, adjusted means including the weight variable as a term in the regression model and unadjusted means the model without weight included. What can be said about the effect comparing 8 and 4 cylinders after looking at models with and without weight included?.</p>
 <p>Solution:</p>
@@ -94,7 +90,7 @@ summary(fit1)$coef[3] </code></pre>
 summary(fit)$coef[3] </code></pre>
 <pre><code>## [1] -6.07086</code></pre>
 <pre class="r"><code>## [1] -6.07086</code></pre>
-<p>Note that 11.564 &gt; 6.071, and so holding weight constant, cylinder appears to have less of an impact on mpg than if weight is disregarded.</p>
+<p><strong>ANSWER: Note that 11.564 &gt; 6.071, and so holding weight constant, cylinder appears to have less of an impact on mpg than if weight is disregarded.</strong></p>
 <p>Question 3</p>
 <p>Consider the mtcars data set. Fit a model with mpg as the outcome that considers number of cylinders as a factor variable and weight as confounder. Now fit a second model with mpg as the outcome model that considers the interaction between number of cylinders (as a factor variable) and weight. Give the P-value for the likelihood ratio test comparing the two models and suggest a model using 0.05 as a type I error rate significance benchmark.</p>
 <p>Solution:</p>
@@ -107,28 +103,16 @@ anova(fit, fit_inter, test = &quot;Chisq&quot;)</code></pre>
 ##   Res.Df    RSS Df Sum of Sq Pr(&gt;Chi)
 ## 1     28 183.06                      
 ## 2     26 155.89  2     27.17   0.1038</code></pre>
-<pre class="r"><code>## Analysis of Variance Table
-## 
-## Model 1: mpg ~ factor(cyl) + wt
-## Model 2: mpg ~ factor(cyl) * wt
-##   Res.Df    RSS Df Sum of Sq Pr(&gt;Chi)
-## 1     28 183.06                      
-## 2     26 155.89  2     27.17   0.1038</code></pre>
-<p>The P-value is larger than 0.05. So, according to our criterion, we would fail to reject, which suggests that the interaction terms may not be necessary.</p>
+<p><strong>ANSWER: The P-value is larger than 0.05. So, according to our criterion, we would fail to reject, which suggests that the interaction terms may not be necessary.</strong></p>
 <p>Question 4</p>
 <p>Consider the mtcars data set. Fit a model with mpg as the outcome that includes number of cylinders as a factor variable and weight inlcuded in the model as</p>
 <p>lm(mpg ~ I(wt * 0.5) + factor(cyl), data = mtcars)</p>
 <p>How is the wt coefficient interpretted?</p>
 <p>Solution:</p>
-<p>Since the unit of (wt * 0.5) is (lb/2000), and one (short) ton is 2000 lbs, the wt coefficient is interpretted as the estimated expected change in MPG per one ton increase in weight for a specific number of cylinders (4, 6, 8).</p>
+<p><strong>ANSWER: Since the unit of (wt * 0.5) is (lb/2000), and one (short) ton is 2000 lbs, the wt coefficient is interpretted as the estimated expected change in MPG per one ton increase in weight for a specific number of cylinders (4, 6, 8).</strong></p>
 <pre class="r"><code>fit4 &lt;- lm(mpg ~ I(wt * 0.5) + factor(cyl), data = mtcars)
 summary(fit4)$coefficient</code></pre>
 <pre><code>##               Estimate Std. Error   t value     Pr(&gt;|t|)
-## (Intercept)  33.990794   1.887793 18.005569 6.257246e-17
-## I(wt * 0.5)  -6.411227   1.507791 -4.252065 2.130435e-04
-## factor(cyl)6 -4.255582   1.386073 -3.070244 4.717834e-03
-## factor(cyl)8 -6.070860   1.652288 -3.674214 9.991893e-04</code></pre>
-<pre class="r"><code>##               Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept)  33.990794   1.887793 18.005569 6.257246e-17
 ## I(wt * 0.5)  -6.411227   1.507791 -4.252065 2.130435e-04
 ## factor(cyl)6 -4.255582   1.386073 -3.070244 4.717834e-03
@@ -146,7 +130,7 @@ hatvalues(fit5)</code></pre>
 ## 0.2286650 0.2438146 0.2525027 0.2804443 0.9945734</code></pre>
 <pre class="r"><code>##         1         2         3         4         5 
 ## 0.2286650 0.2438146 0.2525027 0.2804443 0.9945734</code></pre>
-<p>Question 6</p>
+<p><strong>ANSWER: 0.9946</strong> Question 6</p>
 <p>Consider the following data set</p>
 <p>x &lt;- c(0.586, 0.166, -0.042, -0.614, 11.72) y &lt;- c(0.549, -0.026, -0.127, -0.751, 1.344)</p>
 <p>Give the slope dfbeta for the point with the highest hat value.</p>
@@ -159,10 +143,10 @@ dfbetas(fit6)[, 2]</code></pre>
 ##   -0.37811633   -0.02861769    0.00791512    0.67253246 -133.82261293</code></pre>
 <pre class="r"><code>##             1             2             3             4             5 
 ##   -0.37811633   -0.02861769    0.00791512    0.67253246 -133.82261293</code></pre>
-<p>Question 7</p>
+<p><strong>ANSWER: -134</strong><br />Question 7</p>
 <p>Consider a regression relationship between Y and X with and without adjustment for a third variable Z. Which of the following is true about comparing the regression coefficient between Y and X with and without adjustment for Z.</p>
 <p>Solution:</p>
-<p>It is possible for the coefficient to reverse sign after adjustment. For example, it can be strongly significant and positive before adjustment and strongly significant and negative after adjustment.</p>
+<p><strong>ANSWER: It is possible for the coefficient to reverse sign after adjustment. For example, it can be strongly significant and positive before adjustment and strongly significant and negative after adjustment.</strong></p>
 
 
 </div>
