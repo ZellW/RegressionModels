@@ -2,14 +2,13 @@
 title: 'Coursera:  Linear Regression Project - mtcars'
 author: "Cliff Weaver"
 date: "October 18, 2015"
-output:
-  pdf_document:
-    toc: no
-  html_document:
-    toc: no
+output: pdf_document
+fontsize: 10pt
+geometry: margin = .5in
 ---
 #Executive Summary
-The mtcars dataset is analyzed to evaluate the relationship between a set of variables and miles per gallon (MPG). The data was extracted from the 1974 Motor Trend Magazine providing the MPG and other automobile variables for 32 automobiles (1973–74 models). Regression models and exploratory data analyses to mainly explore how automatic and manual transmissions features affect MPG. The analysis supports the conclusion that lighter cars with a manual transmission offer better fuel economy as measured by MPG when compared to heavier cars with an automatic transmissions.
+The mtcars dataset is analyzed to evaluate the relationship between a set of variables and miles per gallon (MPG). The data was extracted from the 1974 Motor Trend Magazine providing the MPG and other automobile variables for 32 automobiles (1973–74 models). The analysis explores how automatic and manual transmissions features affect MPG. The data suugests  lighter cars with a manual transmission offer better fuel economy compared to heavier cars with an automatic transmissions.
+
 #Problem Statement
 Motor Trend Magazine is interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in the following two questions: 
 
@@ -73,7 +72,6 @@ Based on the analysis we can conclude:
 - mpg decreases negligibly (only 0.32) with every increase of 10 in hp.
 - If number of cylinders, cyl increases from 4 to 6 and 8, mpg will decrease by a factor of 3 and 2.2 respectively (adjusted by hp, wt, and am).
 
-<div style="page-break-after: always;"></div>
 ## Appendix
 
 ### Figure 1:  Data Definitions
@@ -93,12 +91,13 @@ carb  |  Number of carburetors
 
 ###Figure 2 - Pairs Plot
 ```{r pairs, echo=FALSE}
-pairs(mpg ~ ., data = mtcars, panel=panel.smooth, col=2 + mtcars$wt)
+pair_data <- mtcars[, c(1,2,4,6,7,9)]
+pairs(mpg ~ ., data = pair_data, panel= panel.smooth, col=2 + mtcars$wt)
 ```
 
 ###Figure 3 - Boxplot Transmission v MPG 
 
-```{r boxplot, echo=FALSE, cache=TRUE, fig.width=5, fig.height=5}
+```{r boxplot, echo=FALSE, cache=TRUE, fig.width=4.5, fig.height=4.5}
 library(ggplot2)
 ggplot(mtcars, aes(am, mpg)) + geom_boxplot(aes(fill=am, stat="identity")) + labs(x="Transmission") +
      theme(legend.position="none") + annotate(geom="text", x=1, y=17.8, size=3, label="Mean = 17.15 MPG") +
@@ -126,7 +125,7 @@ summary(fit_best)$coef
 ```
 
 ###Figure 7 - Residuals
-```{r, plot_residuals, fig.height=4,fig.width=8}
+```{r, plot_residuals, echo=FALSE, fig.height=4,fig.width=8}
 par(mfrow = c(1,2), mar = c(4, 4, 2, 1))
 plot(fit_best)
 ```
