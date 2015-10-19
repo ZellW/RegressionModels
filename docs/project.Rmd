@@ -24,12 +24,15 @@ mtcars$gear <- factor(mtcars$gear)
 mtcars$carb <- factor(mtcars$carb)
 attach(mtcars)
 ```   
+
+In this analysis, we are interested in the effects of car transmission type on mpg (Appendix - Figure 2). So, we look at the distribution of mpg for each level of am (Automatic or Manual) by plotting box plot. This plot clearly depicts that manual transmissions tend to have higher MPG. This data is further analyzed and discussed in regression analysis section by fitting a linear model.
+
 Then, we do some basic exploratory data analyses. Please refer to the **Appendix: Figures** section for the plots. According to the box plot, we see that manual transmission yields higher values of MPG in general. And as for the pair graph, we can see some higher correlations between variables like "wt", "disp", "cyl" and "hp".  
 
 ## Inference  
 At this step, we make the null hypothesis as the MPG of the automatic and manual transmissions are from the same population (assuming the MPG has a normal distribution). We use the two sample T-test to show it.  
 ```{r}
-result <- t.test(mpg ~ am)
+result <- t.test(mtcars$mpg ~ mtcars$am)
 result$p.value
 result$estimate
 ```  
@@ -91,8 +94,7 @@ Therefore, the above analyses meet all basic assumptions of linear regression an
 ## Appendix: Figures  
 1. Boxplot of MPG vs. Transmission  
 ```{r}
-boxplot(mpg ~ am, xlab="Transmission (0 = Automatic, 1 = Manual)", ylab="MPG",
-        main="Boxplot of MPG vs. Transmission")
+boxplot(mpg ~ am, xlab="Transmission (0 = Automatic, 1 = Manual)", ylab="MPG", main="Boxplot of MPG vs. Transmission")
 ```  
 2. Pair Graph of Motor Trend Car Road Tests  
 ```{r}
