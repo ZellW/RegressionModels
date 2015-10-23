@@ -29,7 +29,7 @@ head(select(mtcars, mpg, wt, cyl, hp, qsec, am, vs))
 ```
 
 # Exploratory Data Analysis  
-After plotting the relationship between the variables of the mtcars dataset, cyl, disp, hp, drat, wt, vs and am appear to have a correlation with mpg (*Figure 2 - Pairs Plot*).  Also, referencing the boxplot in *Figure 3 - Boxplot Transmission v MPG*, data suggest a relatively large difference between the MPG mean between automatic and manual transmissions. The average MPG for cars with automatic transmissions is 17.17 MPG compared to the average with manual transmissions: 24.39 MPG. (See *Figure 4 - MPG Means*)
+After plotting the relationship between the variables of the mtcars dataset, cylinders, displacement, horsepower, rear axle ratio, weight, engine type and transmission appear to have a correlation with MPG (*Figure 2 - Pairs Plot*).  Also, referencing the boxplot in *Figure 3 - Boxplot Transmission v MPG*, data suggest a relatively large difference between the MPG mean between automatic and manual transmissions. The average MPG for cars with automatic transmissions is 17.17 MPG compared to the average with manual transmissions: 24.39 MPG. (See *Figure 4 - MPG Means*)
 
 ##Model Selection
 Multilinear regression analysis is an effective tool to calculate how a car's transmission type (automatic/manual) effects its fuel efficiency while controlling other variables. A baseline model is developed below. (See *Figure 5 - Linear Regression - Single Variable*)
@@ -48,16 +48,13 @@ fit_step = step(lm(data = mtcars, mpg ~ .),direction = "both")
 ```{r fit_step}
 summary(fit_step)$coef
 ```
-The step regression suggests that cyl, hp, wt and am explain most of the variation with mpg.  Comparing this with the baseline  model, evidence the step model (Best Fit Model) is superior is provided. (See *Figure 6 - Best Fit Model*)
+The step regression suggests that cylinders, horsepower, weight and transmission type explain most of the variation with MPG.  Comparing this with the baseline  model, evidence the step model (Best Fit Model) is superior is provided. (See *Figure 6 - Best Fit Model*)
 ```{r fit_best, echo=FALSE, results='hide'}
 fit_best <- lm(mpg ~ cyl + hp + wt + am, data = mtcars)
 #summary(fit_best)$coef
 ```
-```{r anova, echo=FALSE}
-anova(fit_am, fit_best)
-```
 ##Residuals examination  
-Reviewing the residual plots of the Best Fit Model, it can be determined (See *Figure 7 - Residuals*):
+Reviewing the residual plots of the Best Fit Model, the following observations are made (See *Figure 7 - Residuals*):
 
 * The points in the Residuals vs. Fitted plot appear randomly scattered and support the independence condition. (There is a hint of a curve suggesting it departs slightly from normality. The Chrysler Imperial, Fiat 128, and Toyota Corolla exert some influence on the shape of the curve.)
 * The Normal Q-Q plot fall on the line indicating that the residuals are normally distributed.
@@ -70,6 +67,8 @@ Based on the data analysis provided herein, the following observations are suppo
 - Cars with Manual transmission get 1.8 more miles per gallon compared to cars with Automatic transmission.
 - MPG will decrease by 2.5 for every 1000 lb increase in horsepower.
 - When the number of cylinders increase from 4 to 6 and 8, MPG decreases by a 3 and 2.2 respectively.
+
+\newpage
 
 #Appendix
 ##Figure 1: Data Definitions
